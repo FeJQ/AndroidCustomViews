@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 自定义文本框 -->
+    <declare-styleable name="MyTextView">
+        <attr name="text" format="string" />
+        <attr name="textSize" format="dimension" />
+        <attr name="textColor" format="color" />
+    </declare-styleable>
+
+    <!-- 自定义步数进度条-->
+    <declare-styleable name="StepProgressBar">
+        <attr name="CapRound" format="enum">
+            <enum name="plane" value="0"/>
+            <enum name="roundCorner" value="1"/>
+        </attr>
+        <attr name="maxValue" format="integer"/>
+        <attr name="value" format="integer"/>
+        <attr name="TextType" format="enum">
+            <enum name="none" value="0"/>
+            <enum name="value" value="1"/>
+            <enum name="percent" value="2"/>
+        </attr>
+        <attr name="_textSize" format="dimension"/>
+        <attr name="_textColor" format="color"/>
+        <attr name="borderWidth" format="dimension" />
+        <attr name="innerColor" format="color" />
+        <attr name="outerColor" format="color"/>
+        <attr name="sideLength" format="dimension"/>
+    </declare-styleable>
+</resources>
