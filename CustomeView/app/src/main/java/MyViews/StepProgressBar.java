@@ -6,18 +6,22 @@ import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Rect;
 import android.graphics.RectF;
 import android.media.Image;
+import android.os.Build;
 import android.provider.CalendarContract;
 import android.util.AttributeSet;
 import android.view.View;
 
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 
 import com.example.myapplication.R;
 
 import static utils.UtilDimention.sp2px;
 
+@RequiresApi(api = Build.VERSION_CODES.O)
 public class StepProgressBar extends View
 {
     enum Cap
@@ -62,10 +66,10 @@ public class StepProgressBar extends View
     private int mValue = 0;
     private TextType mTextType = TextType.NONE;
     private int mTextSize = 20;
-    private int mTextColor = Color.BLACK;
+    private int mTextColor = getResources().getColor(R.color.pink);
     private int mBorderWidth = 5;
     private int mInnerColor = Color.BLUE;
-    private int mOuterColor = R.color.pink;
+    private int mOuterColor = getResources().getColor(R.color.pink) ;
     private int mSideLength = 0;
 
     private Paint mInnerPaint;
@@ -155,5 +159,30 @@ public class StepProgressBar extends View
         RectF outerRectF = new RectF(mBorderWidth, mBorderWidth, getWidth() - mBorderWidth, getHeight() - mBorderWidth);
         canvas.drawArc(outerRectF, 135,(float)mValue/(float)mMaxValue*270, false, mOuterPaint);
 
+        mTextPaint=new Paint();
+        mTextPaint.setAntiAlias(true);
+        mTextPaint.setTextSize(mTextSize);
+        mTextPaint.setColor(mTextColor);
+
+        String strStep=String.valueOf(mValue);
+        Rect textBounds=new Rect();
+        mTextPaint.getTextBounds(strStep,0,strStep.length(),textBounds);
+        Paint.FontMetricsInt fontMetricsInt = mTextPaint.getFontMetricsInt();
+        int baseLineY=getHeight()/2+(fontMetricsInt.bottom-fontMetricsInt.top)/2-fontMetricsInt.bottom;
+        canvas.drawText(strStep, getWidth()/2-textBounds.width()/2,baseLineY,mTextPaint);
+    }
+
+    public int getValue()
+    {
+        return this.mValue;
+    }
+    public synchronized void setValue(int value)
+    {
+        this.mValue=value;
+        invalidate();
+    }
+    public int getMaxValue()
+    {
+        return this.mMaxValue;
     }
 }

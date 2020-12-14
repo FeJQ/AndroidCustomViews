@@ -8,13 +8,15 @@
     tools:context=".MainActivity">
 
     <MyViews.StepProgressBar
+        android:id="@+id/stepProgressBar"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:sideLength="200dp"
         app:borderWidth="20dp"
         app:CapRound="roundCorner"
         app:maxValue="5000"
-        app:value="1955"
+        app:value="3955"
+        app:_textSize="30sp"
 
         app:layout_constraintBottom_toTopOf="@+id/myTextView"
         app:layout_constraintEnd_toEndOf="parent"
